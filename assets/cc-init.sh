@@ -1,12 +1,12 @@
 #!/bin/bash
 
 ########################################################################
-# ClassCat/OwnCloud Asset files
+# ClassCat/Ganglia Asset files
 # Copyright (C) 2015 ClassCat Co.,Ltd. All rights reserved.
 ########################################################################
 
 #--- HISTORY -----------------------------------------------------------
-# 17-may-15 : fixed.
+# 21-may-15 : created.
 #-----------------------------------------------------------------------
 
 
@@ -15,7 +15,7 @@
 ######################
 
 function init () {
-  echo "ClassCat Info >> initialization code for ClassCat/OwnCloud"
+  echo "ClassCat Info >> initialization code for ClassCat/Ganglia"
   echo "Copyright (C) 2015 ClassCat Co.,Ltd. All rights reserved."
   echo ""
 }
@@ -77,6 +77,9 @@ function proc_supervisor () {
 [program:ssh]
 command=/usr/sbin/sshd -D
 
+[gmetad]
+command=service gmetad restart
+
 [program:apache2]
 command=/usr/sbin/apache2ctl -D FOREGROUND
 
@@ -91,8 +94,8 @@ EOF
 init 
 change_root_password
 put_public_key
-config_mysql
-config_owncloud
+#config_mysql
+#config_owncloud
 proc_supervisor
 
 exit 0
